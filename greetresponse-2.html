@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>{{page_title}}</title>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<script src="http://maps.googleapis.com/maps/api/js"></script>
+
+<script>	
+	function initialize() {
+		var mapProp = {
+		  center:new google.maps.LatLng({{jsonData[0].location.coordinate.latitude}},{{jsonData[0].location.coordinate.longitude}}),
+		  zoom:12,
+		  mapTypeId:google.maps.MapTypeId.ROADMAP
+		  };
+	
+		var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+	{% for i in range(jsonData|length) %}
+		var marker=new google.maps.Marker({
+		  position:new google.maps.LatLng({{jsonData[i].location.coordinate.latitude}},{{jsonData[i].location.coordinate.longitude}}),
+		  });
+	
+		marker.setMap(map);
+		
+		var infowindow = new google.maps.InfoWindow({
+		content:'<div class="iw-content">' +'<h5>{{jsonData[i].name}}</h5>'+'<img src="{{jsonData[i].image_url}}" height="75px" width="75px"/>'
+		+'<p>Rating: {{jsonData[i].rating}}</p>'+
+		'<p>Address: {{jsonData[i].location.display_address[0]}}'+' {{jsonData[i].location.display_address[-1]}}</p>'
+		+'</div>'});
+		
+		infowindow.open(map,marker);
+	{% endfor %}
+		
+	}
+	google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+
+<style class="text/css">
+.iw-content img {
+	float: left;
+	margin: 5px 5px 5px;
+}
+
+.iw-content h5 {
+	font-weight: bold;
+	text-align: center;
+}
+
+ .container-fluid {
+ 	vertical-align: middle;
+ }
+ 
+ .review {
+ 	font-style: italic;
+ 	padding-left: 30px;
+ }
+ 
+ 
+ #results {
+ 	text-align: left;
+ 	margin: 10px;
+ 	padding-left: 50px;
+ }
+ 
+ googleMap {
+ 	margin: auto;
+ }
+ 
+ .bizname {
+ 	font-weight:bold;
+ 	font-size: 16pt;
+ 	padding-top: 20px;
+ }
+ 
+ #search {
+ 	position: absolute;
+ 	top: 29px;
+ 	left: 1050px;
+ }
+ 
+ 
+</style>
+
+</head>
+
+<body>
+	<div class="text-center"><h1>Search Results</h1></div>
+	<div id="googleMap" style="width:100%;height:360px;"></div>
+	<div id ="results">
+			{% for i in range(jsonData|length) %}
+				<p class="bizname">{{jsonData[i].name}}</p>
+				<p class="review">"{{jsonData[i].snippet_text}}"</p>
+			{% endfor %}
+	</div>
+	<a id="search" href="http://hcde310travelitinerary.appspot.com/">Search again</a>
+</body>
+</html>

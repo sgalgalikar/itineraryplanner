@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>{{page_title}}</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+<style class="text/css">
+body {
+	background-color: black;
+	
+}
+ 
+.hero-unit {
+  background-image:url('https://cdn-images-1.medium.com/max/2000/1*-hJv6FboqmwmmZfnBP2Yow.jpeg');
+  background-size:cover;
+  height:700px;
+  opacity: .5;
+} 
+
+.contain {
+  position: absolute;
+  top: 50%;
+  left: 370px;
+  color:#fff;
+}
+input {
+	color: black;
+}
+
+</style>
+
+</head>
+<body>
+	
+	<div class="text-center">
+		<div class = "hero-unit">
+		</div>
+	
+	<div class ="contain">
+	<h1>Itinerary Planner</h1>
+	<h3>Search for places to go in Seattle!</h3>
+		<form action="gresponse" method="post">
+		    <label for="tag">Please enter a search term (cuisine, zoo, cafe):</label>
+		    <input type="text" id="tag" name="username" />
+		    <input type="submit" value="Go" name="gobtn"/> 
+		</form>
+	</div>	
+	</div>
+	
+</body>
+</html>
